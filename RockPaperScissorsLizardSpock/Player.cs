@@ -11,7 +11,7 @@ namespace RockPaperScissorsLizardSpock
         // member variables (HAS A)
         public string name;
         public string choice;
-        public int score;
+        public int score=0;
 
 
         // constructor
