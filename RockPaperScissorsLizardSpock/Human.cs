@@ -9,19 +9,22 @@ namespace RockPaperScissorsLizardSpock
     class Human : Player
     {
         // member variables (HAS A)
+
         
         // constructor
-        public Human()
+        public Human(string name)
         {
-            this.name = GetPlayerName();
+            this.name = name;
+            GetPlayerName();
 
         }
 
         // member methods 
         public string GetPlayerName()
         {
-            Console.WriteLine("Welcome")
-            return ("Name");
+            Console.WriteLine("Welcome " + name +". Please enter your name.");
+            name = Console.ReadLine();
+            return name;
         }
     }
 }
