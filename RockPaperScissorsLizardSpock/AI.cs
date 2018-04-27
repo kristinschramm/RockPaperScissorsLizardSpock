@@ -9,13 +9,16 @@ namespace RockPaperScissorsLizardSpock
     class Ai : Player
     {
         // member variables (HAS A)
+        
 
         // constructor
         public Ai()
         {
             this.name = ("Sparky");
+            this.choice = ("1");
         }
 
         // member methods 
-    }
+        
+    }   
 }

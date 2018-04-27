@@ -14,6 +14,8 @@ namespace RockPaperScissorsLizardSpock
         public string playerCount;
         List<string> choices = new List<string> { "Rock", "Paper", "Scissors", "Lizard", "Spock" };
         List<Player> players = new List<Player> { };
+        public string winner;
+        Random random = new Random();
 
         // constructor
         public Game()
@@ -27,10 +29,10 @@ namespace RockPaperScissorsLizardSpock
         {
             Console.WriteLine("Welcome to Rock Paper Scissors Lizard Spock!");
             GetPlayerCount();
-            CheckPlayerCount();
             AddPlayerToList();
             Round();
             CheckScore();
+            EndGame();
         }
 
         public string GetUserInput()
@@ -38,6 +40,13 @@ namespace RockPaperScissorsLizardSpock
             string input = Console.ReadLine();
             return input;
             //validate input
+        }
+        public string GetAiInput()
+        {
+            int aiInputInt = random.Next(1, 5);
+            string input= aiInputInt.ToString();
+            return input;
+
         }
 
         public void CheckPlayerCount()
@@ -47,20 +56,19 @@ namespace RockPaperScissorsLizardSpock
                 player1 = new Human("Player 1");
                 player2 = new Ai();
                 Console.WriteLine(player1.name + " vs " + player2.name + " Let's go!");
-                return;
             }
             else if (playerCount == "2")
             {
                 player1 = new Human("Player 1");
                 player2 = new Human("Player 2");
                 Console.WriteLine(player1.name + " vs " + player2.name + " Let's go!");
-                return;
             }
             else
             {
                 Console.WriteLine("That doesn't seem right, please enter 1 or 2.");
                 GetPlayerCount();
             }
+            return;
         }
 
         public string GetPlayerCount()
@@ -72,15 +80,16 @@ namespace RockPaperScissorsLizardSpock
         }
         public void Round()
         {
-
+            Console.WriteLine("Press any key to start a new round");
+            Console.ReadKey();
             for (int i = 0; i < players.Count(); i++)
             {
                 Console.Clear();
-                Console.WriteLine("Ready " + players[i].name + "It's your turn!");
+                Console.WriteLine("Ready " + players[i].name + ". It's your turn!");
                 DisplayChoicesMenu();
                 if (players[i].name == "Sparky")
                 {
-                    //write functions for random 
+                    players[i].choice = GetAiInput();
                 }
                 else
                 {
@@ -88,11 +97,11 @@ namespace RockPaperScissorsLizardSpock
 
                 }
                 CheckChoiceInput(players[i].choice);
-                
+
 
 
             }
-            ComparePlayerChoice(player1.choice);
+            ComparePlayerChoice();
 
         }
         public void Player1Wins()
@@ -106,7 +115,25 @@ namespace RockPaperScissorsLizardSpock
             player2.score = player2.score++;
         }
         public void CheckScore()
-        {
+        { if (player1.score < 2 || player2.score < 2)
+            {
+                Round();
+            }
+            else
+            {
+                Console.WriteLine("Game Over!");
+                if (player1.score > player2.score)
+                {
+                    Console.WriteLine(player1.name + " wins!");
+                }
+                else
+                {
+                    Console.WriteLine(player2.name + " wins!");
+                }
+                Console.WriteLine("Press any key to play again.");
+                Console.ReadKey();
+                BeginGame();
+            }
 
         }
         public void DisplayChoicesMenu()
@@ -163,7 +190,7 @@ namespace RockPaperScissorsLizardSpock
                     break;
             }
         }
-        public void ComparePlayerChoice(string choice)
+        public void ComparePlayerChoice()
         {
             if (player1.choice == player2.choice)
             {
@@ -192,16 +219,16 @@ namespace RockPaperScissorsLizardSpock
             if (player1.choice == "2" || player2.choice == "2")
             {
                 Console.WriteLine("Paper covers rock!");
-                    if (player1.choice == "2")
-                    {
+                if (player1.choice == "2")
+                {
                     Player1Wins();
-                    }
-                    else {
+                }
+                else {
                     Player2Wins();
-                    }
-                
+                }
+
             }
-            else if (player1.choice=="3" || player2.choice == "3")
+            else if (player1.choice == "3" || player2.choice == "3")
             {
                 Console.WriteLine("Rocks beats scissor!");
                 if (player1.choice == "1")
@@ -237,7 +264,7 @@ namespace RockPaperScissorsLizardSpock
                     Player2Wins();
                 }
             }
-            
+
         }
         public void PaperCheck()
         {
@@ -279,36 +306,23 @@ namespace RockPaperScissorsLizardSpock
             }
         }
         public void ScissorsCheck()
+        {
+            if (player1.choice == "4" || player2.choice == "4")
             {
-                if (player1.choice == "4" || player2.choice == "4")
+                Console.WriteLine("Scissors decapitates Lizard!");
+                if (player1.choice == "3")
                 {
-                    Console.WriteLine("Scissors decapitates Lizard!");
-                    if (player1.choice == "3")
-                    {
-                        Player1Wins();
-                    }
-                    else
-                    {
-                        Player2Wins();
-                    }
+                    Player1Wins();
                 }
-                else if (player1.choice == "5" || player2.choice == "5")
+                else
                 {
-                    Console.WriteLine("Spock smashes Scissors!");
-                    if (player1.choice == "5")
-                    {
-                        Player1Wins();
-                    }
-                    else
-                    {
-                        Player2Wins();
-                    }
+                    Player2Wins();
                 }
             }
-        public void LizardCheck()
-        {
-            Console.WriteLine("Lizard poisons Spock!");
-                if (player1.choice == "4")
+            else if (player1.choice == "5" || player2.choice == "5")
+            {
+                Console.WriteLine("Spock smashes Scissors!");
+                if (player1.choice == "5")
                 {
                     Player1Wins();
                 }
@@ -318,5 +332,36 @@ namespace RockPaperScissorsLizardSpock
                 }
             }
         }
+        public void LizardCheck()
+        {
+            Console.WriteLine("Lizard poisons Spock!");
+            if (player1.choice == "4")
+            {
+                Player1Wins();
+            }
+            else
+            {
+                Player2Wins();
+            }
+        }
+        public void EndGame()
+        {
+            DetermineWinner();
+            Console.WriteLine("Game Over! " + winner + " wins. Press any key to play again");
+            Console.ReadKey();
+    }
+        public void DetermineWinner()
+        {
+            if (player1.score > player2.score)
+            {
+                winner = player1.name;
+            }
+            else
+            {
+                winner = player2.name;
+            }
+        }
+
+    }
 }
 

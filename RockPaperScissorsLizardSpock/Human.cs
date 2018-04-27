@@ -16,7 +16,7 @@ namespace RockPaperScissorsLizardSpock
         {
             this.name = name;
             GetPlayerName();
-
+            return;
         }
 
         // member methods 
