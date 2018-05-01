@@ -47,7 +47,7 @@ namespace RockPaperScissorsLizardSpock
         }
         public string GetAiInput()
         {
-            int aiInputInt = random.Next(1, 5);
+            int aiInputInt = random.Next(1, 6);
             string input= aiInputInt.ToString();
             return input;
 
