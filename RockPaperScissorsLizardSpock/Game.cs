@@ -21,6 +21,9 @@ namespace RockPaperScissorsLizardSpock
         public Game()
         {
             BeginGame();
+            Round();
+            CheckScore();
+            EndGame();
         }
 
         // member methods 
@@ -30,9 +33,6 @@ namespace RockPaperScissorsLizardSpock
             Console.WriteLine("Welcome to Rock Paper Scissors Lizard Spock!");
             GetPlayerCount();
             AddPlayerToList();
-            Round();
-            CheckScore();
-            EndGame();
         }
 
         public string GetUserInput()
@@ -112,12 +112,12 @@ namespace RockPaperScissorsLizardSpock
         public void Player2Wins()
         {
             Console.WriteLine(player2.name + " wins!");
-            player2.score = player2.score++;
+            player2.score = player2.score++;            
         }
         public void CheckScore()
         { if (player1.score < 2 || player2.score < 2)
             {
-                Round();
+               Round();
             }
             else
             {
@@ -349,7 +349,7 @@ namespace RockPaperScissorsLizardSpock
             DetermineWinner();
             Console.WriteLine("Game Over! " + winner + " wins. Press any key to play again");
             Console.ReadKey();
-    }
+        }
         public void DetermineWinner()
         {
             if (player1.score > player2.score)
@@ -361,7 +361,6 @@ namespace RockPaperScissorsLizardSpock
                 winner = player2.name;
             }
         }
-
     }
 }
 
