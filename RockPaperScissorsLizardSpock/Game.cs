@@ -20,13 +20,17 @@ namespace RockPaperScissorsLizardSpock
         // constructor
         public Game()
         {
+            RunGame();
+        }
+
+        // member methods 
+        public void RunGame()
+        {
             BeginGame();
             Round();
             CheckScore();
             EndGame();
         }
-
-        // member methods 
 
         public void BeginGame()
         {
@@ -138,12 +142,10 @@ namespace RockPaperScissorsLizardSpock
         }
         public void DisplayChoicesMenu()
         {
-            Console.WriteLine("Let's Play!");
-            Console.WriteLine("1. Rock");
-            Console.WriteLine("2. Paper");
-            Console.WriteLine("3. Scissors");
-            Console.WriteLine("4. Lizard");
-            Console.WriteLine("5. Spock");
+            for (int i=0; i < choices.Count; i++)
+            {
+                Console.WriteLine("Press " + (i + 1) + " to choose " + choices[i]);
+            }
         }
         public void AddPlayerToList()
         {
