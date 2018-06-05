@@ -98,15 +98,10 @@ namespace RockPaperScissorsLizardSpock
                 else
                 {
                     players[i].choice = GetUserInput();
-
                 }
                 CheckChoiceInput(players[i].choice);
-
-
-
             }
             ComparePlayerChoice();
-
         }
         public void Player1Wins()
         {
@@ -126,17 +121,7 @@ namespace RockPaperScissorsLizardSpock
             else
             {
                 Console.WriteLine("Game Over!");
-                if (player1.score > player2.score)
-                {
-                    Console.WriteLine(player1.name + " wins!");
-                }
-                else
-                {
-                    Console.WriteLine(player2.name + " wins!");
-                }
-                Console.WriteLine("Press any key to play again.");
-                Console.ReadKey();
-                BeginGame();
+                GameOver();
             }
 
         }
@@ -363,6 +348,21 @@ namespace RockPaperScissorsLizardSpock
                 winner = player2.name;
             }
         }
-    }
+        public void GameOver()
+        {
+            if (player1.score > player2.score)
+            {
+                Console.WriteLine(player1.name + " wins!");
+            }
+            else
+            {
+                Console.WriteLine(player2.name + " wins!");
+            }
+            Console.WriteLine("Press any key to play again.");
+            Console.ReadKey();
+            BeginGame();
+        }
+    } 
+    
 }
 

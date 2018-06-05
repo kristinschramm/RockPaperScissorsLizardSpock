@@ -17,7 +17,7 @@ namespace RockPaperScissorsLizardSpock
         // constructor
         public Player()
         {
-            
+            score = 0;
         }
 
 
